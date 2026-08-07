@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Services — OmicsWare Innovations</title>
+<link rel="icon" type="image/svg+xml" href="omicsware_logo_dna_circuit_2.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0f7c6e;
+    --teal-light: #1eb8a5;
+    --teal-pale: #e1f5f3;
+    --deep: #0a1628;
+    --gold: #c98a2f;
+    --gold-light: #f0c97a;
+    --cream: #fdf8f0;
+    --ink: #1a1a2e;
+    --muted: #5a6475;
+    --border: #d8dce6;
+    --white: #ffffff;
+    --light-bg: #f7f9fc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--ink); line-height: 1.7; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,22,40,0.96); backdrop-filter: blur(12px);
+    padding: 0 5%; display: flex; align-items: center;
+    justify-content: space-between; height: 80px;
+    border-bottom: 1px solid rgba(30,184,165,0.2);
+  }
+  .nav-logo img { height: 64px; width: auto; display: block; transition: opacity 0.2s; }
+  .nav-logo:hover img { opacity: 0.8; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal-light); }
+  .nav-links a.active { color: var(--teal-light); }
+  .nav-cta { background: var(--teal); color: var(--white) !important; padding: 8px 20px; border-radius: 6px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--teal-light) !important; }
+
+  /* hamburger */
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; position: fixed; top: 80px; left: 0; right: 0; background: rgba(10,22,40,0.98); flex-direction: column; padding: 24px 5%; gap: 0; border-bottom: 1px solid rgba(30,184,165,0.2); }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .nav-links a { padding: 14px 0; display: block; font-size: 16px; }
+    .nav-cta { margin-top: 12px; text-align: center; border-radius: 6px !important; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--deep); padding: 140px 5% 90px; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 70% at 90% 50%, rgba(15,124,110,0.14) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 10% 80%, rgba(201,138,47,0.07) 0%, transparent 60%);
+  }
+  .hero-inner { position: relative; max-width: 760px; }
+  .hero-eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 20px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 58px); font-weight: 900; color: var(--white); line-height: 1.15; margin-bottom: 24px; }
+  .hero h1 em { color: var(--teal-light); font-style: normal; }
+  .hero-sub { font-size: 18px; color: rgba(255,255,255,0.62); max-width: 580px; margin-bottom: 40px; line-height: 1.7; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+  .hero-pill { background: rgba(30,184,165,0.12); border: 1px solid rgba(30,184,165,0.3); color: var(--teal-light); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { display: inline-block; background: var(--teal); color: var(--white); text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.65); text-decoration: none; font-weight: 500; font-size: 15px; padding: 14px 0; transition: color 0.2s; }
+  .btn-ghost:hover { color: var(--white); }
+  .hero-stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--teal) 0%, var(--teal-light) 50%, var(--gold) 100%); }
+
+  /* ── TRUST BAR ── */
+  .trust-bar { background: var(--light-bg); border-bottom: 1px solid var(--border); padding: 18px 5%; display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); font-weight: 500; }
+  .trust-item span.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-light); display: inline-block; }
+
+  /* ── SECTION COMMONS ── */
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 16px; }
+  .section-sub { font-size: 17px; color: var(--muted); max-width: 600px; line-height: 1.7; }
+
+  /* ── SERVICES ── */
+  .services { padding: 88px 5%; background: var(--white); }
+  .services-header { text-align: center; margin-bottom: 60px; }
+  .services-header .section-sub { margin: 0 auto; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 1100px; margin: 0 auto; }
+
+  .service-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+    padding: 36px 32px; transition: all 0.25s; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .service-card:hover { border-color: var(--teal-light); box-shadow: 0 8px 32px rgba(15,124,110,0.10); transform: translateY(-3px); }
+  .service-card:hover::before { opacity: 1; }
+  .service-card.gold-card::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .service-card.gold-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(201,138,47,0.10); }
+
+  .service-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; background: var(--teal-pale); }
+  .service-icon.gold-icon { background: #fdf3e3; }
+  .service-icon.blue-icon { background: #e8f0fe; }
+  .service-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+  .service-card .service-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.65; }
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .service-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--ink); }
+  .service-features li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal-light); margin-top: 7px; flex-shrink: 0; }
+  .service-card.gold-card .service-features li::before { background: var(--gold); }
+  .service-card.blue-card .service-features li::before { background: #4285f4; }
+  .service-tag { display: inline-block; margin-top: 24px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); background: var(--teal-pale); padding: 4px 10px; border-radius: 4px; }
+  .service-tag.gold-tag { color: var(--gold); background: #fdf3e3; }
+  .service-tag.blue-tag { color: #4285f4; background: #e8f0fe; }
+
+  /* ── HOW WE WORK ── */
+  .process { padding: 88px 5%; background: var(--light-bg); }
+  .process-inner { max-width: 1000px; margin: 0 auto; }
+  .process-header { margin-bottom: 56px; }
+  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; position: relative; }
+  .process-steps::before { content: ''; position: absolute; top: 28px; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, var(--teal-light), var(--gold)); opacity: 0.3; z-index: 0; }
+  .process-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+  .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 2px solid var(--teal-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--teal); }
+  .process-step h4 { font-weight: 600; font-size: 15px; color: var(--ink); margin-bottom: 8px; }
+  .process-step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── WHY OMICSWARE ── */
+  .why { padding: 88px 5%; background: var(--white); }
+  .why-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .why-left .section-sub { margin-bottom: 32px; }
+  .why-points { display: flex; flex-direction: column; gap: 20px; }
+  .why-point { display: flex; align-items: flex-start; gap: 16px; }
+  .why-point-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--teal-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .why-point-text h4 { font-weight: 600; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+  .why-point-text p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .why-right { background: var(--deep); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; }
+  .why-right::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--gold)); }
+  .why-right h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white); margin-bottom: 8px; }
+  .why-right p { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 28px; line-height: 1.7; }
+  .pricing-options { display: flex; flex-direction: column; gap: 16px; }
+  .pricing-opt { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 18px 20px; }
+  .pricing-opt h4 { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 4px; }
+  .pricing-opt p { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+  .pricing-opt .opt-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+  .badge-teal { background: rgba(30,184,165,0.2); color: var(--teal-light); }
+  .badge-gold { background: rgba(201,138,47,0.2); color: var(--gold-light); }
+
+  @media (max-width: 768px) { .why-inner { grid-template-columns: 1fr; } }
+
+  /* ── DELIVERABLES ── */
+  .deliverables { padding: 88px 5%; background: var(--light-bg); }
+  .deliverables-inner { max-width: 1000px; margin: 0 auto; }
+  .deliverables-header { text-align: center; margin-bottom: 48px; }
+  .deliverables-header .section-sub { margin: 0 auto; }
+  .del-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .del-item { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .del-item .del-icon { font-size: 28px; margin-bottom: 12px; }
+  .del-item h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .del-item p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+  /* ── CTA ── */
+  .cta-section { padding: 100px 5%; background: var(--deep); position: relative; overflow: hidden; text-align: center; }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(15,124,110,0.15) 0%, transparent 70%); }
+  .cta-inner { position: relative; max-width: 640px; margin: 0 auto; }
+  .cta-section .section-label { color: var(--teal-light); margin-bottom: 16px; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(30px, 4vw, 46px); font-weight: 700; color: var(--white); margin-bottom: 20px; line-height: 1.2; }
+  .cta-section p { font-size: 17px; color: rgba(255,255,255,0.55); margin-bottom: 44px; line-height: 1.7; }
+  .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+  .btn-cta-primary { display: inline-block; background: var(--teal); color: var(--white); text-decoration: none; padding: 16px 36px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.2s; letter-spacing: 0.2px; }
+  .btn-cta-primary:hover { background: var(--teal-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,124,110,0.35); }
+  .btn-cta-whatsapp { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); text-decoration: none; padding: 16px 28px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: all 0.2s; }
+  .btn-cta-whatsapp:hover { background: rgba(255,255,255,0.14); color: var(--white); }
+  .cta-note { font-size: 13px; color: rgba(255,255,255,0.3); }
+  .cta-note a { color: rgba(255,255,255,0.45); }
+  .cta-stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--teal), var(--teal-light), var(--gold)); }
+
+  /* ── FOOTER ── */
+  footer { background: #060e1a; padding: 32px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--white); }
+  .footer-brand span { color: var(--teal-light); }
+  .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 4px; }
+  .footer-right { font-size: 13px; color: rgba(255,255,255,0.3); text-align: right; }
+  .footer-right a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-right a:hover { color: var(--teal-light); }
+  @media (max-width: 600px) { footer { flex-direction: column; text-align: center; } .footer-right { text-align: center; } }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="omicsware_logo_dna_circuit_2.svg" alt="OmicsWare Innovations">
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#program">Training Program</a></li>
+    <li><a href="services.html" class="active">Research Services</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="mailto:info@omicsware.net?subject=Research%20Services%20Inquiry" class="nav-cta">Request a Quotation</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Bioinformatics Research Services</div>
+    <h1>Your data is ready.<br><em>We take it to publication.</em></h1>
+    <p class="hero-sub">OmicsWare Innovations provides research-grade computational analysis for PIs and PhD scholars — from raw sequencing data to publication-quality figures, tables, and reproducible pipelines.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">🧬 RNA-seq Transcriptomics</span>
+      <span class="hero-pill">🔬 Whole Genome Resequencing</span>
+      <span class="hero-pill">🌱 Metagenomics</span>
+      <span class="hero-pill">📊 Publication-Ready Figures</span>
+      <span class="hero-pill">📋 GST-Compliant Invoicing</span>
+    </div>
+    <div class="hero-actions">
+      <a href="mailto:info@omicsware.net?subject=Research%20Services%20Inquiry&body=Dear%20Dr.%20Sharma%2C%0A%0AI%20would%20like%20to%20request%20a%20quotation%20for%20bioinformatics%20analysis.%0A%0AProject%20description%3A%0AData%20type%3A%0AApproximate%20number%20of%20samples%3A%0ATarget%20journal%2Fdeadline%3A%0A%0AThank%20you" class="btn-primary">Request a Quotation →</a>
+      <a href="index.html" class="btn-ghost">View Training Program →</a>
+    </div>
+  </div>
+  <div class="hero-stripe"></div>
+</section>
+
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="dot"></span> PhD-level analysis by Dr. Nitesh Kumar Sharma</div>
+  <div class="trust-item"><span class="dot"></span> Former Postdoc, University of Southern California</div>
+  <div class="trust-item"><span class="dot"></span> 18+ peer-reviewed publications · 340+ citations</div>
+  <div class="trust-item"><span class="dot"></span> Milestone-based delivery · GST-compliant</div>
+  <div class="trust-item"><span class="dot"></span> Jaipur, India · Serving researchers nationwide</div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section class="services">
+  <div class="services-header">
+    <div class="section-label">What we offer</div>
+    <h2 class="section-title">Three core service areas</h2>
+    <p class="section-sub">Every analysis is grounded in published research pipelines, delivered with reproducible code and publication-quality outputs — not generic automated reports.</p>
+  </div>
+  <div class="services-grid">
+
+    <!-- RNA-seq -->
+    <div class="service-card">
+      <div class="service-icon">🧬</div>
+      <h3>RNA-seq Transcriptomics</h3>
+      <p class="service-desc">Comprehensive differential expression and functional analysis for plant, animal, and microbial transcriptomes. From count matrix to manuscript figures.</p>
+      <ul class="service-features">
+        <li>Differential expression analysis (DESeq2 / edgeR)</li>
+        <li>Volcano plots, MA plots, heatmaps</li>
+        <li>GO and KEGG functional enrichment</li>
+        <li>Expression trajectory clustering (Mfuzz / STEM)</li>
+        <li>Transcription factor enrichment analysis</li>
+        <li>Weighted Gene Co-expression Network (WGCNA)</li>
+        <li>Candidate gene identification and heatmaps</li>
+        <li>Multi-comparison UpSet analysis</li>
+      </ul>
+      <span class="service-tag">Most requested</span>
+    </div>
+
+    <!-- WGS -->
+    <div class="service-card gold-card">
+      <div class="service-icon gold-icon">🔬</div>
+      <h3>Whole Genome Resequencing</h3>
+      <p class="service-desc">Population-level and comparative genomic analyses from WGS data. Particularly suited for polyploid species, crop genomics, and evolutionary studies.</p>
+      <ul class="service-features">
+        <li>Variant calling and annotation (GATK / FreeBayes)</li>
+        <li>SNP and InDel filtering and classification</li>
+        <li>Structural variation detection (SVs, CNVs)</li>
+        <li>Genome stabilization analysis</li>
+        <li>Population structure and phylogenomics</li>
+        <li>Selection sweep analysis</li>
+        <li>Comparative genomics across accessions</li>
+        <li>Sub-genome level analysis (polyploids)</li>
+      </ul>
+      <span class="service-tag gold-tag">Polyploid expertise</span>
+    </div>
+
+    <!-- Metagenomics -->
+    <div class="service-card blue-card" style="border-color: var(--border);">
+      <div class="service-icon blue-icon">🌱</div>
+      <h3>Metagenomics</h3>
+      <p class="service-desc">Microbial community profiling and functional characterization from amplicon and shotgun sequencing data. Soil, gut, environmental, and clinical samples.</p>
+      <ul class="service-features">
+        <li>16S / ITS amplicon analysis (QIIME2 / DADA2)</li>
+        <li>Taxonomic profiling and diversity metrics</li>
+        <li>Alpha and beta diversity analysis</li>
+        <li>Differential abundance testing</li>
+        <li>Shotgun metagenomics assembly</li>
+        <li>Functional annotation (HUMAnN3 / KEGG)</li>
+        <li>Metagenome-assembled genomes (MAGs)</li>
+        <li>Environmental factor correlation analysis</li>
+      </ul>
+      <span class="service-tag blue-tag" style="color:#4285f4;background:#e8f0fe;">Amplicon + Shotgun</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── HOW WE WORK ── -->
+<section class="process">
+  <div class="process-inner">
+    <div class="process-header">
+      <div class="section-label">The process</div>
+      <h2 class="section-title">Simple, transparent, milestone-driven</h2>
+      <p class="section-sub">You share your data and workplan. We send a detailed quotation within 48 hours. Work begins only after mutual agreement — no surprises.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h4>Share your project</h4>
+        <p>Email us your data description, analysis goals, and any existing workplan. The more detail, the better the quotation.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h4>Receive a quotation</h4>
+        <p>A detailed, itemised quotation with scope, deliverables, timeline milestones, and pricing — within 48 hours.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h4>Analysis begins</h4>
+        <p>After mutual agreement on scope and timeline, work starts immediately. You receive milestone updates throughout.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h4>Delivery + support</h4>
+        <p>All figures, tables, matrices, and scripts delivered. One revision round included. We stay available beyond delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY OMICSWARE ── -->
+<section class="why">
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="section-label">Why OmicsWare</div>
+      <h2 class="section-title">Not a pipeline. A collaboration.</h2>
+      <p class="section-sub">Generic sequencing company reports are a starting point, not a manuscript. We deliver the depth your publication actually requires.</p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon">📖</div>
+          <div class="why-point-text">
+            <h4>Research-grade pipelines</h4>
+            <p>Every analysis is based on published methodologies — the same tools and approaches used in high-impact journals, not automated black-box reports.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🎨</div>
+          <div class="why-point-text">
+            <h4>Publication-quality figures</h4>
+            <p>SVG and PDF outputs at journal-ready resolution. Every figure is crafted for the manuscript, not exported from a default template.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">💻</div>
+          <div class="why-point-text">
+            <h4>Reproducible scripts</h4>
+            <p>All analyses delivered with fully documented, annotated R scripts. Your results are reproducible, reviewable, and yours to reuse.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🤝</div>
+          <div class="why-point-text">
+            <h4>Beyond the invoice</h4>
+            <p>Figure adjustments, table re-filtering, quick questions during manuscript writing — we stay with your project until it's published, not just until it's delivered.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-right">
+      <h3>Transparent pricing</h3>
+      <p>Every project receives a detailed, itemised quotation. We offer two engagement models to fit different institutional contexts.</p>
+      <div class="pricing-options">
+        <div class="pricing-opt">
+          <div class="opt-badge badge-teal">Standard</div>
+          <h4>Service-only engagement</h4>
+          <p>Full analysis, figures, tables, and scripts delivered. GST-compliant invoice issued per milestone. No authorship involved.</p>
+        </div>
+        <div class="pricing-opt">
+          <div class="opt-badge badge-gold">Collaborative</div>
+          <h4>With co-authorship</h4>
+          <p>For significant analytical contributions, co-authorship is offered in lieu of a portion of the fee. Standard practice in academic bioinformatics collaborations.</p>
+        </div>
+      </div>
+      <p style="margin-top:20px;font-size:12px;color:rgba(255,255,255,0.3);">All prices exclusive of GST @ 18% (SAC 998313). Quotation delivered within 48 hours of inquiry.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DELIVERABLES ── -->
+<section class="deliverables">
+  <div class="deliverables-inner">
+    <div class="deliverables-header">
+      <div class="section-label">Every project includes</div>
+      <h2 class="section-title">What you receive</h2>
+      <p class="section-sub">A complete, manuscript-ready package — not just results, but everything needed to submit with confidence.</p>
+    </div>
+    <div class="del-grid">
+      <div class="del-item">
+        <div class="del-icon">📊</div>
+        <h4>Publication figures</h4>
+        <p>SVG + PDF, journal-ready resolution, fully labelled and formatted</p>
+      </div>
+      <div class="del-item">
+        <div class="del-icon">📋</div>
+        <h4>Data tables</h4>
+        <p>Excel spreadsheets per analysis — DEG lists, enrichment results, cluster summaries</p>
+      </div>
+      <div class="del-item">
+        <div class="del-icon">🧮</div>
+        <h4>Expression matrices</h4>
+        <p>Raw counts, VST-normalized, and TPM matrices in CSV format</p>
+      </div>
+      <div class="del-item">
+        <div class="del-icon">💻</div>
+        <h4>R scripts</h4>
+        <p>Fully annotated, reproducible scripts for every analysis step</p>
+      </div>
+      <div class="del-item">
+        <div class="del-icon">📝</div>
+        <h4>Methods documentation</h4>
+        <p>Step-by-step workflow notes ready to adapt into your Methods section</p>
+      </div>
+      <div class="del-item">
+        <div class="del-icon">🔄</div>
+        <h4>One revision round</h4>
+        <p>One full round of revisions included — figure adjustments, re-filtering, layout changes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label">Get started</div>
+    <h2>Ready to move your data forward?</h2>
+    <p>Share your project details and receive a detailed, itemised quotation within 48 hours. No commitment required to enquire.</p>
+    <div class="cta-buttons">
+      <a href="mailto:info@omicsware.net?subject=Research%20Services%20Inquiry&body=Dear%20Dr.%20Sharma%2C%0A%0AI%20would%20like%20to%20request%20a%20quotation%20for%20bioinformatics%20analysis.%0A%0AProject%20description%3A%0AData%20type%3A%0AApproximate%20number%20of%20samples%3A%0ATarget%20journal%2Fdeadline%3A%0A%0AThank%20you" class="btn-cta-primary">Request a Quotation →</a>
+      <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Dr.%20Sharma%2C%20I%20would%20like%20to%20discuss%20a%20bioinformatics%20analysis%20project." class="btn-cta-whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quick question on WhatsApp
+      </a>
+    </div>
+    <p class="cta-note">Or write directly to <a href="mailto:info@omicsware.net">info@omicsware.net</a> · Quotation delivered within 48 hours</p>
+  </div>
+  <div class="cta-stripe"></div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-brand">Omics<span>Ware</span> Innovations</div>
+    <div class="footer-tagline">Research-Grade Bioinformatics Training & Services · Jaipur, India</div>
+  </div>
+  <div class="footer-right">
+    <p>Founded by <a href="mailto:info@omicsware.net">Dr. Nitesh Kumar Sharma, PhD</a></p>
+    <p style="margin-top:4px;"><a href="index.html">Training Program</a> &nbsp;·&nbsp; <a href="services.html">Research Services</a> &nbsp;·&nbsp; <a href="mailto:info@omicsware.net">Contact</a></p>
+  </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
